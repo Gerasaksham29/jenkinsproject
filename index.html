@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Covid Tracker</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+          
+        </style>
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <h1 class="heading w3-center w3-aqua" id="head">Welcome User</h1>
+        <div class="w3-center">
+            <div class="w3-bar">
+              <button class="w3-button w3-black" id="button" onclick="getData()">Show Data</button>
+            </div>
+            </div>
+        <!-- <-- <button id="button" onclick="getData()">Show Data</button> -->
+        <div >
+            <ul class="w3-ul" style="width:30%" id="info">
+              </ul>
+        </div>
+        <script>
+            let url = "https://api.covidtracking.com/v1/states/current.json";
+            var i=0;
+            var str = "";
+            let element = document.getElementById("info");
+            let response;
+            let data;
+            async function getData(){
+                if(data == null){
+                    response = await fetch(url);
+                    data = await response.json();
+                }
+                for( ; i<data.length; i++){
+                    str += "<li>" + data[i]["state"] + " - " + data[i]["positive"] + " - " + data[i]["probableCases"] + " - " + data[i]["negative"] + "</li>";
+                }
+                element.innerHTML = str;
+                console.log(element)
+            }
+        </script>
+    </body>
+</html>
